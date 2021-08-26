@@ -58,7 +58,7 @@ class App extends React.Component {
 
   render() {
     // console.log("App.js this.state.tasks", this.state.tasks);
-    console.log("active tab", this.state.activeTab);
+    // console.log("active tab", this.state.activeTab);
     return (
       <>
         <h1 className="text-center m-3">To do list</h1>

@@ -2,10 +2,17 @@ import React from "react";
 
 class List extends React.Component {
   render() {
+    const filteredTasks =
+      this.props.activeTab === "All"
+        ? this.props.tasks
+        : this.props.tasks.filter(
+            (elem) => elem.status === this.props.activeTab
+          );
+
     return (
       <>
         <h1 className="text-center m-3">Ma liste : </h1>
-        {this.props.tasks.map((elem, index) => {
+        {filteredTasks.map((elem, index) => {
           return (
             <div className="container mt-5">
               <div className="row">
