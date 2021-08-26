@@ -3,7 +3,6 @@ import Form from "./components/Form";
 import List from "./components/List";
 import Button from "./components/Button";
 import "bootstrap/dist/css/bootstrap.css";
-import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 class App extends React.Component {
   constructor(props) {
