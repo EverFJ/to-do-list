@@ -8,19 +8,45 @@ class App extends React.Component {
     super(props);
     this.state = {
       tasks: [],
+      input: "",
+      select: "To do",
     };
   }
 
   addTask = (task) => {
     this.setState({
       tasks: [{ description: task, status: "To do" }, ...this.state.tasks],
+      indexToModify: null,
     });
   };
 
   deleteTask = (index) => {
-    console.log("index", index);
-    const tasks = [...this.state.tasks].splice(index, 1);
+    let tasks = [...this.state.tasks];
+    tasks.splice(index, 1);
     this.setState({ tasks: tasks });
+  };
+
+  modifyTask = (input, index) => {
+    this.setState({ indexToModify: index, input: input });
+  };
+
+  handleInputChange = (e) => {
+    this.setState({ input: e.target.value });
+  };
+
+  onSelectChange = (e) => {
+    console.log(e);
+    this.setState({ select: e.target.value });
+  };
+
+  onClickValidate = (index) => {
+    let tasks = [...this.state.tasks];
+    tasks[index].description = this.state.input;
+    tasks[index].status = this.state.select;
+    this.setState({
+      indexToModify: null,
+      tasks: tasks,
+    });
   };
 
   render() {
@@ -30,7 +56,17 @@ class App extends React.Component {
         <h1 className="text-center m-3">To do list</h1>
         <Form addTask={this.addTask} />
         <br />
-        <List tasks={this.state.tasks} onClick={this.deleteTask} />
+        <List
+          tasks={this.state.tasks}
+          indexToModify={this.state.indexToModify}
+          input={this.state.input}
+          selectValue={this.state.select}
+          onClickDelete={this.deleteTask}
+          onClickModify={this.modifyTask}
+          onClickValidate={this.onClickValidate}
+          handleInputChange={this.handleInputChange}
+          onSelectChange={this.onSelectChange}
+        />
       </>
     );
   }
