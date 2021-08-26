@@ -1,7 +1,9 @@
 import React from "react";
 import Form from "./components/Form";
 import List from "./components/List";
+import Button from "./components/Button";
 import "bootstrap/dist/css/bootstrap.css";
+import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 class App extends React.Component {
   constructor(props) {
@@ -10,8 +12,13 @@ class App extends React.Component {
       tasks: [],
       input: "",
       select: "To do",
+      activeTab: "All",
     };
   }
+
+  handleTabClick = (tab) => {
+    this.setState({ activeTab: tab });
+  };
 
   addTask = (task) => {
     this.setState({
@@ -51,16 +58,22 @@ class App extends React.Component {
 
   render() {
     // console.log("App.js this.state.tasks", this.state.tasks);
+    console.log("active tab", this.state.activeTab);
     return (
       <>
         <h1 className="text-center m-3">To do list</h1>
         <Form addTask={this.addTask} />
         <br />
+        <Button onClick={this.handleTabClick}>All</Button>
+        <Button onClick={this.handleTabClick}>To do</Button>
+        <Button onClick={this.handleTabClick}>Doing</Button>
+        <Button onClick={this.handleTabClick}>Done</Button>
         <List
           tasks={this.state.tasks}
           indexToModify={this.state.indexToModify}
           input={this.state.input}
           selectValue={this.state.select}
+          activeTab={this.state.activeTab}
           onClickDelete={this.deleteTask}
           onClickModify={this.modifyTask}
           onClickValidate={this.onClickValidate}
