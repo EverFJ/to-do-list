@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./components/Form";
 import List from "./components/List";
 import Button from "./components/Button";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   constructor(props) {
